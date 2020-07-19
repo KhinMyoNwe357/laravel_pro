@@ -11,6 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('php', 'HomeController@phpPage');
+Route::get('js', 'HomeController@jsPage');
+
+// Route::get('/', function () {
+//     return view('home', ['name'=> 'Home Page']);
+// });
+
+// Route::get('php', function() {
+// 	return view('php', [
+// 		"data" => array(
+// 			'lesson1'=> 'this is php lesson1',
+// 			'lesson2'=> 'this is php lesson2',
+// 			'lesson3'=> 'this is php lesson3',
+// 		)
+// 	]);
+// });
+
+// Route::get('js', function() {
+// 	return view('js', [
+// 		"data" => array(
+// 			'lesson1'=> 'this is js lesson1',
+// 			'lesson2'=> 'this is js lesson2',
+// 			'lesson3'=> 'this is js lesson3',
+// 		)
+// 	]);
+// });
