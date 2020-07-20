@@ -5,10 +5,10 @@
 </head>
 <body>
 	@yield('content')
-	<ul>
+	<!-- <ul>
 		<a href="php"><li>PHP Page</li></a>
 		<a href="js"><li>JS Page</li></a>
 	</ul>
-	@yield('lessonSection')
+	@yield('lessonSection') -->
 </body>
 </html>
