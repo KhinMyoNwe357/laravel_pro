@@ -32,7 +32,11 @@
 		<div class="form-group row">
 			<label class="col-12 col-md-2 col-lg-2">Category</label>
 			<div class=" col-12 col-md-4 col-lg-4">
-				<input type="text" name="category" value="{{ $receipe->category }}" class="form-control" placeholder="category" >
+				<select class="form-control" name="category">
+					@foreach($category as $value)
+					<option value="{{ $value->id }}" {{ $receipe->categories->id==$value->id ? "selected" : ''}}>{{ $value->name }}</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 		<div class="form-group row">

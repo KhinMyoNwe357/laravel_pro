@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Categories;
 use App\Receipes;
 use Illuminate\Http\Request;
 
 class ReceipesController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +20,8 @@ class ReceipesController extends Controller
      */
     public function index()
     {
-         $data = Receipes::all();
-        
+        $data = Receipes::where('owner_id', auth()->id())->get();
+
         return view('home', compact('data'));
     }
 
@@ -26,7 +32,8 @@ class ReceipesController extends Controller
      */
     public function create()
     {
-        return view('create_receipe');
+        $category = Categories::all();
+        return view('create_receipe', compact('category'));
     }
 
     /**
@@ -43,7 +50,7 @@ class ReceipesController extends Controller
             "category" => 'required'
         ]);
 
-        Receipes::create($validatedData);
+        Receipes::create($validatedData + ["owner_id" => auth()->id()] );
 
         return redirect("receipe");
     }
@@ -56,6 +63,10 @@ class ReceipesController extends Controller
      */
     public function show(Receipes $receipe)
     {
+        // if ($receipe->owner_id != auth()->id()) {
+        //     abort(400);
+        // }
+       $this->authorize('view', $receipe);
        return view("show", compact("receipe"));
     }
 
@@ -67,7 +78,8 @@ class ReceipesController extends Controller
      */
     public function edit(Receipes $receipe)
     {
-        return view("edit", compact("receipe"));
+        $category = Categories::all();
+        return view("edit", compact("receipe", "category"));
     }
 
     /**

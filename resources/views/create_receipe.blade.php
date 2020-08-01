@@ -5,12 +5,12 @@
 	<h2>Receipe Page</h2>
 	@if ($errors->any())
 	<div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+		<ul>
+			@foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	</div>
 	@endif
 	<form action="/receipe" method="POST">
 		{{ csrf_field() }}
@@ -29,7 +29,11 @@
 		<div class="form-group row">
 			<label class="col-12 col-md-2 col-lg-2">Category</label>
 			<div class=" col-12 col-md-4 col-lg-4">
-				<input type="text" name="category" class="form-control" placeholder="category" value="{{ old('category') }}" required>
+				<select class="form-control" name="category">
+					@foreach($category as $value)
+					<option value="{{ $value->id }}">{{ $value->name }}</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 		<div class="form-group row">
