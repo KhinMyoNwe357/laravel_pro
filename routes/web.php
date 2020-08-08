@@ -1,5 +1,7 @@
 <?php
 
+use App\Receipes;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +12,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+	dd(app('test'));
+});
 
 Route::resource('receipe', 'ReceipesController');
 Route::get('home', 'HomeController@index');

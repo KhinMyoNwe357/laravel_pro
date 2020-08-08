@@ -52,6 +52,7 @@ class ReceipesController extends Controller
 
         Receipes::create($validatedData + ["owner_id" => auth()->id()] );
 
+        session()->flash('message','Receipe has created successfully');
         return redirect("receipe");
     }
 
@@ -79,6 +80,7 @@ class ReceipesController extends Controller
     public function edit(Receipes $receipe)
     {
         $category = Categories::all();
+
         return view("edit", compact("receipe", "category"));
     }
 
@@ -99,6 +101,8 @@ class ReceipesController extends Controller
 
         $receipe->update($validatedData);
 
+        session()->flash('message','Receipe data update successfully!');
+        
         return redirect("receipe");
     }
 
@@ -111,6 +115,7 @@ class ReceipesController extends Controller
     public function destroy(Receipes $receipe)
     {
         $receipe->delete();
+        session()->flash('message','Receipe data delete successfully!');
         return redirect("receipe");
     }
 }
