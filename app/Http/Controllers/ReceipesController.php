@@ -50,9 +50,8 @@ class ReceipesController extends Controller
             "category" => 'required'
         ]);
 
-        Receipes::create($validatedData + ["owner_id" => auth()->id()] );
+        $receipe = Receipes::create($validatedData + ["owner_id" => auth()->id()] );
 
-        session()->flash('message','Receipe has created successfully');
         return redirect("receipe");
     }
 
