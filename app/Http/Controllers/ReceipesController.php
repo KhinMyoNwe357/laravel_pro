@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Categories;
+use App\Events\ReceipesCreatedEvent;
+use App\Notifications\ReceipesStoredNotification;
 use App\Receipes;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReceipesController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -20,6 +23,9 @@ class ReceipesController extends Controller
      */
     public function index()
     {
+        // $user = User::find(1);
+        // $user->notify(new ReceipesStoredNotification($user));
+
         $data = Receipes::where('owner_id', auth()->id())->get();
 
         return view('home', compact('data'));
@@ -44,6 +50,7 @@ class ReceipesController extends Controller
      */
     public function store()
     {
+
         $validatedData = request()->validate([
             "name" => 'required',
             "ingredients" => 'required',
@@ -51,6 +58,8 @@ class ReceipesController extends Controller
         ]);
 
         $receipe = Receipes::create($validatedData + ["owner_id" => auth()->id()] );
+        
+        //event(new ReceipesCreatedEvent($receipe));
 
         return redirect("receipe");
     }
@@ -101,7 +110,10 @@ class ReceipesController extends Controller
         $receipe->update($validatedData);
 
         session()->flash('message','Receipe data update successfully!');
-        
+
+        // $user = User::find(auth()->id());
+        // $user->notify(new ReceipesStoredNotification($user));
+
         return redirect("receipe");
     }
 
@@ -115,6 +127,10 @@ class ReceipesController extends Controller
     {
         $receipe->delete();
         session()->flash('message','Receipe data delete successfully!');
+
+        // $user = User::find(auth()->id());
+        // $user->notify(new ReceipesStoredNotification($user));
+        
         return redirect("receipe");
     }
 }

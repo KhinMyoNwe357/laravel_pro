@@ -2,7 +2,7 @@
 # Introduction
 
 {{ $receipe->name }}
-Receipe hav been stored.
+Receipe have been stored.
 
 @component('mail::button', ['url' => ''])
 Button Text

@@ -18,5 +18,9 @@ Route::get('/', function () {
 
 Route::resource('receipe', 'ReceipesController');
 Route::get('home', 'HomeController@index');
+Route::get('/', 'PublicController@index');
+Route::get('details/{id}', 'PublicController@show');
+
+Route::resource('category', 'CategoriesController');
 
 Auth::routes();
