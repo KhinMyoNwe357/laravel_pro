@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Events\ReceipesCreatedEvent;
 use App\Listeners\ReceipesCreatedListener;
+use App\Events\CategoriesCreatedEvent;
+use App\Listeners\CategoriesCreatedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ReceipesCreatedEvent::class => [
             ReceipesCreatedListener::class,
+        ],
+        CategoriesCreatedEvent::class => [
+            CategoriesCreatedListener::class,
         ],
     ];
 

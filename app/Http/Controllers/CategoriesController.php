@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categories;
+use App\Events\CategoriesCreatedEvent;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -49,7 +50,7 @@ class CategoriesController extends Controller
 
         $category = Categories::create($validatedData + ["user_id" => auth()->id()]);
         
-        //event(new ReceipesCreatedEvent($receipe));
+        event(new CategoriesCreatedEvent($category));
 
         return redirect("category");
     }

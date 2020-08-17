@@ -41,7 +41,7 @@ class ReceipesStoredNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Receipes Update Notification!')
+                    ->line('Receipes Stored Notification!')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

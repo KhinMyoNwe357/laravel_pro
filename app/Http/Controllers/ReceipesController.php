@@ -26,7 +26,7 @@ class ReceipesController extends Controller
         // $user = User::find(1);
         // $user->notify(new ReceipesStoredNotification($user));
 
-        $data = Receipes::where('owner_id', auth()->id())->get();
+        $data = Receipes::where('owner_id', auth()->id())->paginate(9);
 
         return view('home', compact('data'));
     }

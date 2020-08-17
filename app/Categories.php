@@ -13,4 +13,20 @@ class Categories extends Model
     {
         return $this->hasMany(Receipes::calss);
     }
+
+    protected static function boot()
+    {
+    	Parent::boot();
+    	static::created(function($category){
+    		session()->flash('message', 'Category has been created Successfully!');
+    	});
+
+    	static::updated(function($category){
+    		session()->flash('message', 'Category has been updated Successfully!');
+    	});
+
+    	static::deleted(function($category){
+    		session()->flash('deleted', 'Category has been deleted Successfully!');
+    	});
+    }
 }

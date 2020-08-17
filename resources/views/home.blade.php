@@ -28,6 +28,7 @@
 				<hr>
 				@endforeach
 			</div>
+			{{ $data->links() }}
 		</div>
 	</div>
 </div>
