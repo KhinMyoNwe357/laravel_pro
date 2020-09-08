@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categories;
 use App\Events\ReceipesCreatedEvent;
+use App\Http\Requests\ReceipesStoredRequest;
 use App\Notifications\ReceipesStoredNotification;
 use App\Receipes;
 use App\User;
@@ -48,15 +49,15 @@ class ReceipesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ReceipesStoredRequest $request)
     {
-
-        $validatedData = request()->validate([
-            "name" => 'required',
-            "ingredients" => 'required',
-            "category" => 'required',
-            "receipeImage" => 'required|image'
-        ]);
+        $validatedData = $request->validated();
+        // $validatedData = request()->validate([
+        //     "name" => 'required',
+        //     "ingredients" => 'required',
+        //     "category" => 'required',
+        //     "receipeImage" => 'required|image'
+        // ]);
 
         // upload image
         $image = date('YmdHis').".".request()->receipeImage->getClientOriginalExtension();

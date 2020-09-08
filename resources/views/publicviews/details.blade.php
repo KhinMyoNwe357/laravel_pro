@@ -20,6 +20,8 @@
               <h3>{{ $receipe->name }}</h3>
               <p class="card-text">{{ $receipe->ingredients }}</p>
               <p>{{ $receipe->categories->name }}</p>
+              <!-- <p>{{ $receipe['created_at']->format('Y/m/d') }}</p> -->
+              <p>{{ date('Y/m/d', strtotime($receipe->created_at)) }}</p>
               <div class="img_container">
                 <img src="{{ '/images/'.$receipe->image }}">
               </div>

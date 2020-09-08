@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
     public function index() {
-    	$receipe = Receipes::paginate(9);
+    	$receipe = Receipes::orderBy('id', 'desc')->paginate(9);
     	return view('publicviews.welcome', compact('receipe'));
     }
 
