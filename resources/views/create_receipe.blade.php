@@ -12,7 +12,7 @@
 		</ul>
 	</div>
 	@endif
-	<form action="/receipe" method="POST">
+	<form action="/receipe" method="POST" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group row">
 			<label class="col-12 col-md-2 col-lg-2">Receipe Name</label>
@@ -34,6 +34,12 @@
 					<option value="{{ $value->id }}">{{ $value->name }}</option>
 					@endforeach
 				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-12 col-md-2 col-lg-2">Receipe Image</label>
+			<div class=" col-12 col-md-4 col-lg-4">
+				<input type="file" name="receipeImage" required>
 			</div>
 		</div>
 		<div class="form-group row">

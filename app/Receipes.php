@@ -11,7 +11,7 @@ class Receipes extends Model
 {
     //protected $table = 'receipe';
 
-    protected $fillable = ['name', 'ingredients', 'category', 'owner_id'];
+    protected $fillable = ['name', 'ingredients', 'category', 'owner_id', 'image'];
 
     public $dispatchesEvents = [
         'created' => ReceipesCreatedEvent::class,

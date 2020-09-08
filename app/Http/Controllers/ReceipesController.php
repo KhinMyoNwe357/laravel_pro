@@ -54,10 +54,14 @@ class ReceipesController extends Controller
         $validatedData = request()->validate([
             "name" => 'required',
             "ingredients" => 'required',
-            "category" => 'required'
+            "category" => 'required',
+            "receipeImage" => 'required|image'
         ]);
 
-        $receipe = Receipes::create($validatedData + ["owner_id" => auth()->id()] );
+        // upload image
+        $image = date('YmdHis').".".request()->receipeImage->getClientOriginalExtension();
+        request()->receipeImage->move(public_path('images'), $image);
+        $receipe = Receipes::create($validatedData + ["owner_id" => auth()->id(), 'image' => $image ] );
         
         //event(new ReceipesCreatedEvent($receipe));
 
@@ -101,18 +105,24 @@ class ReceipesController extends Controller
      */
     public function update(Receipes $receipe)
     {
+        $this->authorize('view',$receipe);
+
         $validatedData = request()->validate([
             "name" => 'required',
             "ingredients" => 'required',
-            "category" => 'required'
+            "category" => 'required',
+            "receipeImage" => 'image'
         ]);
-
-        $receipe->update($validatedData);
+        
+        if (request()->receipeImage) {
+            $image = date('YmdHis') . "." . request()->receipeImage->getClientOriginalExtension();
+            request()->receipeImage->move(public_path('images'), $image);
+            $receipe->update($validatedData + ['image'=> $image]);
+        }else {
+            $receipe->update($validatedData);
+        }
 
         session()->flash('message','Receipe data update successfully!');
-
-        // $user = User::find(auth()->id());
-        // $user->notify(new ReceipesStoredNotification($user));
 
         return redirect("receipe");
     }

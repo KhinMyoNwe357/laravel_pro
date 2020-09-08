@@ -20,6 +20,9 @@
               <h3>{{ $receipe->name }}</h3>
               <p class="card-text">{{ $receipe->ingredients }}</p>
               <p>{{ $receipe->categories->name }}</p>
+              <div class="img_container">
+                <img src="{{ '/images/'.$receipe->image }}">
+              </div>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="/"><button type="button" class="btn btn-sm btn-outline-secondary">Back</button></a>
